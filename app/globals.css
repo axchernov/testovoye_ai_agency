@@ -487,13 +487,18 @@ a {
 }
 
 .marquee div {
+  position: relative;
+  left: 50%;
   width: max-content;
-  padding: 16px 0;
+  min-width: 100%;
+  margin-inline: auto;
+  padding: 16px 28px;
+  text-align: center;
   font-family: var(--font-display);
   font-size: clamp(21px, 2.2vw, 34px);
   letter-spacing: -0.03em;
   word-spacing: 14px;
-  transform: rotate(-1deg);
+  transform: translateX(-50%) rotate(-1deg);
 }
 
 .marquee span {
