@@ -18,7 +18,7 @@ export function TerminalCard() {
           <span>automation.sh</span>
         </div>
         <div className="terminal__body">
-          <p className="terminal__label">// LIVE WORKFLOW</p>
+          <p className="terminal__label">{"// LIVE WORKFLOW"}</p>
           {commands.map(([prompt, action, result]) => (
             <div className="terminal__command" key={action}>
               <span className="terminal__prompt">{prompt}</span>
