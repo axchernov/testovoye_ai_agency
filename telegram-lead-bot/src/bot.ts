@@ -1,5 +1,6 @@
 import { Markup, Telegraf, type Context } from "telegraf";
 import { message } from "telegraf/filters";
+import { HttpsProxyAgent } from "https-proxy-agent";
 
 import { formatLead } from "./formatLead.js";
 import { questions } from "./questions.js";
@@ -66,8 +67,15 @@ async function deliverLead(ctx: Context, userId: number, adminChatId: number | u
   }
 }
 
-export function createBot(botToken: string, adminChatId: number | undefined): Telegraf<Context> {
-  const bot = new Telegraf(botToken);
+export function createBot(
+  botToken: string,
+  adminChatId: number | undefined,
+  proxyUrl?: string,
+): Telegraf<Context> {
+  const bot = new Telegraf(
+    botToken,
+    proxyUrl ? { telegram: { agent: new HttpsProxyAgent(proxyUrl) } } : undefined,
+  );
 
   bot.start(async (ctx) => {
     clearSurvey(ctx.from.id);
