@@ -43,6 +43,17 @@ test("styles include responsive and reduced-motion contracts", async () => {
   assert.match(css, /overflow-x:\s*clip/);
 });
 
+test("marquee text is centered within the orange ribbon", async () => {
+  const css = await read("app/globals.css");
+  const marqueeContent = css.match(/\.marquee div\s*\{(?<rules>[\s\S]*?)\}/)?.groups?.rules ?? "";
+
+  assert.match(marqueeContent, /min-width:\s*100%/);
+  assert.match(marqueeContent, /margin-inline:\s*auto/);
+  assert.match(marqueeContent, /text-align:\s*center/);
+  assert.match(marqueeContent, /left:\s*50%/);
+  assert.match(marqueeContent, /transform:\s*translateX\(-50%\)/);
+});
+
 test("README documents setup, build and bot link replacement", async () => {
   const readme = await read("README.md");
   for (const command of ["npm install", "npm run dev", "npm run build"]) {
